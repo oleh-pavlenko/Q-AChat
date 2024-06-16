@@ -1,10 +1,13 @@
 import streamlit as st
 import pandas as pd
+import json
+import base64
 from google.oauth2 import service_account
 from google.cloud import storage
 
-SERVICE_ACCOUNT_FILE = st.secrets['GCP_SERVICE_ACCOUNT']
+ENCODED_SERVICE_ACCOUNT_KEY = st.secrets['GCP_SERVICE_ACCOUNT']
 BUCKET_NAME = st.secrets['GCP_BUCKET_NAME']
+SERVICE_ACCOUNT_INFO = json.loads(base64.b64decode(ENCODED_SERVICE_ACCOUNT_KEY))
 
 st.markdown("""
         <style>
@@ -39,7 +42,7 @@ st.title("Excel Data Q&A Application")
 # Authenticate with Google Cloud Storage
 @st.cache_resource
 def get_gcs_client():
-    credentials = service_account.Credentials.from_service_account_file(SERVICE_ACCOUNT_FILE)
+    credentials = service_account.Credentials.from_service_account_info(SERVICE_ACCOUNT_INFO)
     client = storage.Client(credentials=credentials)
     return client
 
