@@ -3,8 +3,8 @@ import pandas as pd
 from google.oauth2 import service_account
 from google.cloud import storage
 
-SERVICE_ACCOUNT_FILE = ''
-BUCKET_NAME = ''
+SERVICE_ACCOUNT_FILE = st.secrets['GCP_SERVICE_ACCOUNT']
+BUCKET_NAME = st.secrets['GCP_BUCKET_NAME']
 
 st.markdown("""
         <style>
