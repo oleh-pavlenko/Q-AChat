@@ -53,6 +53,7 @@ bucket = client.bucket(BUCKET_NAME)
 def upload_to_gcs(file_name, file_data):
     blob = bucket.blob(file_name)
     blob.upload_from_file(file_data, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+    blob.make_public()
     return blob.public_url
 
 # Function to process the uploaded file and store it in the session state
