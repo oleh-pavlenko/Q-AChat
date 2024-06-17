@@ -137,7 +137,7 @@ for message in st.session_state['dialogue']:
 # Display the table or data in the main section if file is uploaded
 if st.session_state['file_uploaded']:
     # Question input section
-    question = st.text_input("Ask a question...", key='question_input')
+    st.text_input("Ask a question...", key='question_input')
     if st.button("Send"):
         handle_question(st.session_state['question_input'])
         st.rerun()
